@@ -20,7 +20,10 @@ class TwigEngine implements EngineInterface
     public function render($template, $data, $config): string
     {
         $loader = new FilesystemLoader($config['view_path']);
-        $twig = new Environment($loader, ['cache' => $config['cache_path']]);
+        $twig = new Environment($loader, [
+            'cache' => $config['cache_path'],
+            'auto_reload' => $config['auto_reload'] ?? false
+        ]);
 
         return $twig->render($template, $data);
     }
